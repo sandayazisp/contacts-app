@@ -1,8 +1,10 @@
 import React from 'react';
 import {createRoot} from 'react-dom/client';
+import ContactApp from './components/ContactApp';
 
-const heading = <h1>Hello Sanday</h1>
+// style
+import './styles/style.css';
 
 const root = createRoot(document.getElementById('root'));
 
-root.render(heading);
+root.render(<ContactApp />);
