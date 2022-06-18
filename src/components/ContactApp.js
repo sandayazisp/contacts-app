@@ -1,6 +1,7 @@
 import React from 'react';
 import ContactList from './ContactList';
 import { getData } from '../utils/data';
+import ContactInput from './ContactInput';
 
 
 class ContactApp extends React.Component {
@@ -12,6 +13,7 @@ class ContactApp extends React.Component {
         }
 
         this.onDeleteHandler = this.onDeleteHandler.bind(this)
+        this.onAddContactHandler = this.onAddContactHandler.bind(this)
     }
 
     onDeleteHandler(id){
@@ -19,9 +21,26 @@ class ContactApp extends React.Component {
         this.setState({contacts})
     }
 
+    onAddContactHandler({name, tag}){
+        this.setState((prevState) => {
+            return{
+                contacts: [
+                    ...prevState.contacts,
+                    {
+                        id: +new Date(),
+                        name,
+                        tag,
+                        imageUrl: '/images/default.jpg',
+                    }
+                ]
+            }
+        })
+    }
+
     render() {
         return (
             <div className='contact-app'>
+                <ContactInput addContact={this.onAddContactHandler} />
                 <h1>Daftar Kontak</h1>
                 <ContactList contacts={this.state.contacts} onDelete={this.onDeleteHandler} />
             </div>
